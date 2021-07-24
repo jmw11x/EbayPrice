@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">>
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome admin user</h1>
+
+    <button onclick = "signOut()">Sign out</button>
+    <button onclick = "addmessage()" class ="actionbtn">+</button>
+
+
+
+
+    <table id = "table">
+        <th>Admin messages</tr>
+    </table>
+
+
+    <script>
+        function addmessage(){
+            var message =prompt("Please enter your message");
+            if(message != null){
+                db.collection("messages").doc().set({
+                    message : message,
+                })
+                .then(() => {
+                    alert("Message added");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+            }
+            
+        }
+    </script>
+    <script>
+        function signOut() {
+            admin.signOut().then(() => {
+                console.log('user signed out');
+                window.open('index.html', '_self');
+            })
+        }
+
+
+
+    </script>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyDvGItZ9Pht2Jh9oWHHcIJVnNrJkjA_1Sk",
+          authDomain: "mobileapphw1.firebaseapp.com",
+          projectId: "mobileapphw1",
+          storageBucket: "mobileapphw1.appspot.com",
+          messagingSenderId: "29599921082",
+          appId: "1:29599921082:web:d66e1cedef4d1dcb616383",
+          measurementId: "G-CWNCR6SRP5"
+        };
+   
+    firebase.initializeApp(firebaseConfig);
+    const admin = firebase.auth();
+    const db = firebase.firestore();
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">>
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="form_register">
+        First Name: <input type="text" name="" id="first">
+        <br>
+        last Name: <input type="text" name="" id="last">
+        <br>
+        email: <input type="text" name="" id="email">
+        <br>
+        password: <input type="password" name="" id="pw">
+        <br>
+        role: <input type="text" name="" id="role">
+        <br>
+        <button onclick="addUser()">Register</button>
+    </div>
+    <script>
+        
+
+
+        function writefs(uid){
+            db.collection("users").doc("LA").set({
+                name: "Los Angeles",
+                state: "CA",
+                country: "USA"
+            })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }
+        function addUser(){
+            var first = document.getElementById('first').value;
+            var last = document.getElementById('last').value;
+            var email = document.getElementById('email').value;
+            var pw = document.getElementById('pw').value;
+            var role = document.getElementById('role').value;
+            console.log(email)
+
+            admin.createUserWithEmailAndPassword( email,pw).then(cred =>{
+                console.log(cred);
+                db.collection("users").doc(cred.user.uid).set({
+                    firstName : first,
+                    lastName : last,
+                    email : email,
+                    role : role,
+                })
+                .then(() => {
+                    alert("Success welcome to my app");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+                if(role == 'admin'){
+                    window.open('admin.html', '_self');
+                }else{
+                    window.open('home.html', '_self');
+                }
+            });
+            
+        }
+    </script>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyDvGItZ9Pht2Jh9oWHHcIJVnNrJkjA_1Sk",
+          authDomain: "mobileapphw1.firebaseapp.com",
+          projectId: "mobileapphw1",
+          storageBucket: "mobileapphw1.appspot.com",
+          messagingSenderId: "29599921082",
+          appId: "1:29599921082:web:d66e1cedef4d1dcb616383",
+          measurementId: "G-CWNCR6SRP5"
+        };
+   
+    firebase.initializeApp(firebaseConfig);
+    const admin = firebase.auth();
+    const db = firebase.firestore();
+    </script>
+</body>
+</html>
