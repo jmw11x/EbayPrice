@@ -112,9 +112,10 @@ class AdminAlert {
     // print(current);
 
     if (search != '') {
-      final qry = FirebaseFirestore.instance
-          .collection(current)
-          .where('item', isGreaterThanOrEqualTo: search);
+      final qry = FirebaseFirestore.instance.collection(current).where('item',
+          isGreaterThanOrEqualTo: search,
+          isLessThan: search.substring(0, search.length - 1) +
+              String.fromCharCode(search.codeUnitAt(search.length - 1) + 1));
       await qry.get().then((message) {
         message.docs.forEach((value) {
           // print("54" + value["message"]);
