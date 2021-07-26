@@ -87,7 +87,7 @@ class AdminAlert {
     // print(current);
     final Query chats1 = FirebaseFirestore.instance
         .collection(current)
-        .where('item', isEqualTo: current);
+        .where('item', isGreaterThanOrEqualTo: current);
     // print(current);
     await chats1.get().then((message) {
       message.docs.forEach((value) {
@@ -106,27 +106,49 @@ class AdminAlert {
     return msgs;
   }
 
-  Future<String> getMessagesAsString(String current) async {
+  Future<String> getMessagesAsString(String current, String search) async {
     print(current + "MSG");
     String msgs = '';
     // print(current);
-    final CollectionReference qry =
-        FirebaseFirestore.instance.collection(current);
-    // print(current);
-    await qry.get().then((message) {
-      message.docs.forEach((value) {
-        // print("54" + value["message"]);
-        if (value["item"] != null)
-          msgs = msgs +
-              value["item"] +
-              " " +
-              value["condition"] +
-              ": " +
-              value['price'] +
-              "\n";
-        // print(msgs);
+
+    if (search != '') {
+      final qry = FirebaseFirestore.instance
+          .collection(current)
+          .where('item', isGreaterThanOrEqualTo: search);
+      await qry.get().then((message) {
+        message.docs.forEach((value) {
+          // print("54" + value["message"]);
+          if (value["item"] != null)
+            msgs = msgs +
+                value["item"] +
+                " " +
+                value["condition"] +
+                ": " +
+                value['price'] +
+                "\n";
+          // print(msgs);
+        });
       });
-    });
+    } else {
+      final CollectionReference qry =
+          FirebaseFirestore.instance.collection(current);
+      await qry.get().then((message) {
+        message.docs.forEach((value) {
+          // print("54" + value["message"]);
+          if (value["item"] != null)
+            msgs = msgs +
+                value["item"] +
+                " " +
+                value["condition"] +
+                ": " +
+                value['price'] +
+                "\n";
+          // print(msgs);
+        });
+      });
+    }
+    // print(current);
+
     return msgs;
   }
 

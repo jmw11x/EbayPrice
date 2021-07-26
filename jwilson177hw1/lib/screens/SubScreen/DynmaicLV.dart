@@ -4,6 +4,7 @@ import 'package:jwilson177hw1/services/adminalert.dart';
 import 'package:jwilson177hw1/services/auth.dart';
 
 String other = '';
+String search = '';
 
 class DynamicLV extends StatefulWidget {
   @override
@@ -108,7 +109,7 @@ class _DynamicLVCState extends State<DynamicLVC> {
     current_user.then((value) => setState(() {
           cur = value;
         }));
-    Future<String> msgs = db.getMessagesAsString(other);
+    Future<String> msgs = db.getMessagesAsString(other, search);
     msgs.then((value) => setState(() {
           msg = value;
           // print(msg);
@@ -142,6 +143,7 @@ class Conversation extends StatefulWidget {
 }
 
 class _ConversationState extends State<Conversation> {
+  TextEditingController _searchcontroller = TextEditingController();
   String message = '';
   String msg = '';
   String current_user = '';
@@ -193,26 +195,15 @@ class _ConversationState extends State<Conversation> {
               Expanded(child: DynamicLVC()),
               Container(
                 child: TextFormField(
+                  controller: _searchcontroller,
                   validator: (v) => v!.isEmpty ? 'cannot leave empty' : null,
                   decoration: InputDecoration(
                       hintText: 'message', helperText: 'search'),
-                  onChanged: (v) => {setState(() => message = v)},
+                  onChanged: (v) => {search = v},
                 ),
               ),
-              SingleChildScrollView(
-                child: ElevatedButton(
-                    onPressed: () async {
-                      //search here
-                      print("Search for" + message);
-                      db.search(message);
-                      FocusScope.of(context).unfocus();
-                    },
-                    child: Text(">Search")),
-              )
             ],
           ),
         ));
   }
 }
-
-
