@@ -53,7 +53,7 @@ class _DynamicLVPState extends State<DynamicLVP> {
               onTap: () {
                 launch("https://www.ebay.com/sch/" + item.split(":")[0]);
               },
-              onDoubleTap: () {
+              onLongPress: () {
                 launch("https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1311&_nkw=" +
                     item.split(":")[0] +
                     "%2010&_sacat=0&LH_TitleDesc=0&_odkw=tom+brady+rookie+card&_osacat=0&_sop=16&LH_Complete=1&LH_Sold=1");

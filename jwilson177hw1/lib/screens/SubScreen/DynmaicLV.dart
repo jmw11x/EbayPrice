@@ -149,6 +149,9 @@ class _ConversationState extends State<Conversation> {
   String current_user = '';
   String name = '';
   String docid = '';
+  String condition = '';
+  String price = '';
+  String itemname = '';
 
   bool cexists = false;
   bool cexists1 = false;
@@ -175,6 +178,7 @@ class _ConversationState extends State<Conversation> {
         }));
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(other),
           backgroundColor: Colors.greenAccent,
@@ -191,7 +195,39 @@ class _ConversationState extends State<Conversation> {
         ),
         body: Container(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Container(
+                child: TextFormField(
+                  validator: (v) => v!.isEmpty ? 'cannot leave empty' : null,
+                  decoration: InputDecoration(
+                      hintText: 'item name', helperText: 'enter item name'),
+                  onChanged: (v) => {itemname = v},
+                ),
+              ),
+              Container(
+                child: TextFormField(
+                  validator: (v) => v!.isEmpty ? 'cannot leave empty' : null,
+                  decoration: InputDecoration(
+                      hintText: 'item price', helperText: 'enter item price'),
+                  onChanged: (v) => {price = v},
+                ),
+              ),
+              Container(
+                child: TextFormField(
+                  validator: (v) => v!.isEmpty ? 'cannot leave empty' : null,
+                  decoration: InputDecoration(
+                      hintText: 'Enter condition',
+                      helperText: 'Condition of item'),
+                  onChanged: (v) => {condition = v},
+                ),
+              ),
+              ElevatedButton(
+                  child: Text('Add new item'),
+                  onPressed: () {
+                    db.addAdminMessage(itemname, price, condition, other);
+                  }),
               Expanded(child: DynamicLVC()),
               Container(
                 child: TextFormField(

@@ -170,12 +170,12 @@ class AdminAlert {
     return msgs;
   }
 
-  Future addAdminMessage(String message, String current, String name) async {
-    await FirebaseFirestore.instance.collection(current).doc().set({
-      'Message': message,
-      'datetime': DateTime.now().toLocal().toString(),
-      'author': name
-    });
+  Future addAdminMessage(
+      String item, String price, String condition, String current) async {
+    await FirebaseFirestore.instance
+        .collection(current)
+        .doc()
+        .set({'item': item, 'price': price, 'condition': condition});
   }
 
   Future addItem(String message, String current) async {
